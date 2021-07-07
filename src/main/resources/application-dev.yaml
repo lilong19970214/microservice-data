@@ -1,0 +1,7 @@
+server:
+  port: 8083
+
+#freemarker 模板引擎
+spring:
+  datasource:
+    url:
