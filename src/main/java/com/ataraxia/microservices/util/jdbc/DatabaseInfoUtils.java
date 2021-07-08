@@ -6,6 +6,7 @@ import com.ataraxia.microservices.entity.GenConfig;
 import com.ataraxia.microservices.util.jdbc.DatabaseConnection;
 import com.ataraxia.microservices.enums.DatabaseEnum;
 import com.ataraxia.microservices.util.MapUtils;
+import com.google.common.base.CaseFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,7 +51,7 @@ public class DatabaseInfoUtils {
                 if (tableName.equals(genConfig.getTableName())) {
                     //表注释
                     String tableComment = resultSet.getString("REMARKS");
-                    databaseTableInfo = new DatabaseTableInfo(tableName, tableComment);
+                    databaseTableInfo = new DatabaseTableInfo(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, tableName), tableComment);
                 }
             }
         } catch (Exception e) {
@@ -88,7 +89,7 @@ public class DatabaseInfoUtils {
                 //字段类型
                 String typeName = resultSet.getString(DatabaseEnum.TYPE_NAME.toString());
 
-                list.add(new DatabaseColumnInfo(columnName, typeName, remark, nullAble, typeSize));
+                list.add(new DatabaseColumnInfo(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, columnName), typeName, remark, nullAble, typeSize));
             }
         } catch (SQLException e) {
             e.printStackTrace();

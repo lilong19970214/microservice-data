@@ -26,7 +26,7 @@ public class CodeGenerateUtils {
         try {
             Template entityTemplate = CONFIGURATION.getTemplate("entity.ftl");
             Map<String, Object> data = MapUtils.of("tableInfo", tableInfo, "columnInfoList", columnInfoList);
-            entityTemplate.process(data, new FileWriter("d:/123.java"));
+            entityTemplate.process(data, new FileWriter("D:/123.java"));
         } catch (IOException | TemplateException e) {
             e.printStackTrace();
         }
