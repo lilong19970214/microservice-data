@@ -12,13 +12,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * @author MyPC
+ * @author lilong
  */
 public class TestController {
 
     public static void main(String[] args) throws SQLException {
-        GenConfig genConfig = new GenConfig("cwsj_qj_qrcode", "qrcode_info");
-        Connection connection = DatabaseConnection.getConnection("jdbc:postgresql://192.168.100.100:5430/qj", "dcsm", "dcsm8523", "org.postgresql.Driver");
+        GenConfig genConfig = new GenConfig("public", "test_table");
+        Connection connection = DatabaseConnection.getConnection("jdbc:postgresql://localhost:5432/microservice", "postgres", "123456");
         DatabaseInfoUtils databaseInfoUtils = new DatabaseInfoUtils(connection);
         DatabaseTableInfo tableInfo = databaseInfoUtils.getTables(genConfig);
         List<DatabaseColumnInfo> columnInfoList = databaseInfoUtils.getColumns(genConfig);

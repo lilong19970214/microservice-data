@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * <p>代码生成工具类<p/>
  *
- * @author MyPC
+ * @author lilong
  */
 public class CodeGenerateUtils {
 

@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
- * @author MyPC
+ * @author lilong
  *
  * <P>表字段信息<P/>
  */

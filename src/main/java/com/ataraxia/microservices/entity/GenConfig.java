@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * @author MyPC
+ * @author lilong
  *
  * <p>代码生成时连接数据库时信息<p/>
  */
