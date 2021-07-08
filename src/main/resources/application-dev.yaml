@@ -1,7 +1,24 @@
 server:
   port: 8083
 
-#freemarker 模板引擎
+#oauth2 权限认证配置
+security:
+  oauth2:
+    client:
+      client-id: dimples
+      client_secret: 123456
+    resource:
+      token-info-uri: http://localhost:8082/oauth/check_token
+
+#数据源配置
 spring:
   datasource:
-    url:
+    url: jdbc:postgresql://127.0.0.1:5432/microservice
+    username: postgres
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+    druid:
+      max-wait: 6000
+      initial-size: 10
+      min-idle: 10
+      max-active: 200

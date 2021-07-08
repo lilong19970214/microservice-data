@@ -25,6 +25,9 @@ public class PgsqlConversion implements ConversionType {
         CONVERSION.put("float8", "Double");
         CONVERSION.put("date", "Date");
         CONVERSION.put("timestamp", "Date");
+        //自增序列统一使用Long类型
+        CONVERSION.put("serial", "Long");
+        CONVERSION.put("bigserial", "Long");
     }
 
     @Override
