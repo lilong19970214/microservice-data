@@ -1,56 +1,30 @@
-package com.ataraxia.microservices.util;
+package com.ataraxia.microservices.util.jdbc;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 
 import java.io.*;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Objects;
 
 /**
  * @author LiLong
+ *
+ * <p>或者指定数据库的链接时，在对应模块加入指定数据库的驱动依赖即可<p/>
  */
 public final class SqlExecuteUtil {
 
     private final Logger logger = LoggerFactory.getLogger(SqlExecuteUtil.class);
 
     private ScriptRunner runner;
-    private static Connection connection;
+    private final Connection connection;
 
     /**
      * 依然单例
      */
-    private SqlExecuteUtil() {
-
-    }
-
-    /**
-     * 获取数据库链接 [阿里数据源的方式]
-     */
-    public static SqlExecuteUtil getConnection(DruidDataSource dataSource) throws SQLException {
-        return getConnection(dataSource.getUrl(), dataSource.getUsername(), dataSource.getPassword());
-    }
-
-    /**
-     * 获取数据库连接 [spring jdbc的配置]
-     */
-    public static SqlExecuteUtil getConnection(DataSourceProperties dataSource) throws SQLException {
-        return getConnection(dataSource.getUrl(), dataSource.getUsername(), dataSource.getPassword());
-    }
-
-    /**
-     * @param username 数据库用户名
-     * @param password 数据库密码
-     * @param url      数据库链接地址
-     */
-    public static SqlExecuteUtil getConnection(String url, String username, String password) throws SQLException {
-        connection = DriverManager.getConnection(url, username, password);
-        return new SqlExecuteUtil();
+    public SqlExecuteUtil(Connection connection) {
+        this.connection = connection;
     }
 
     /**
