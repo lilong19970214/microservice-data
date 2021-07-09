@@ -7,7 +7,6 @@ import com.ataraxia.microservices.entity.GenConfig;
 import com.ataraxia.microservices.util.generate.CodeGenerateUtils;
 import com.ataraxia.microservices.util.jdbc.DatabaseInfoUtils;
 import com.ataraxia.microservices.util.jdbc.DatabaseConnection;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +26,7 @@ public class TestController {
     private DruidDataSource dataSource;
     @Resource
     private CodeGenerateUtils codeGenerateUtils;
+
 
     @PostMapping("/generate")
     public String generate(@RequestBody GenConfig genConfig) throws SQLException {
