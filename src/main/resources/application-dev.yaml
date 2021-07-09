@@ -5,7 +5,7 @@ server:
 security:
   oauth2:
     client:
-      client-id: dimples
+      client-id: microservices
       client_secret: 123456
     resource:
       token-info-uri: http://localhost:8082/oauth/check_token
