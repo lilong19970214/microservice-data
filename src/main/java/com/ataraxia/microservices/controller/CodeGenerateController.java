@@ -8,8 +8,6 @@ import com.ataraxia.microservices.util.generate.CodeGenerateUtils;
 import com.ataraxia.microservices.util.jdbc.DatabaseInfoUtils;
 import com.ataraxia.microservices.util.jdbc.DatabaseConnection;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

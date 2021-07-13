@@ -5,7 +5,7 @@ package com.nice.code
  * @description ${tableInfo.tableComment !}
  * @author Li Long
  */
-public class ${tableInfo.tableName } implements Serializable {
+public class ${tableInfo.tableName} implements Serializable {
 
     <#--生成字段模板-->
     <#list columnInfoList as column>
