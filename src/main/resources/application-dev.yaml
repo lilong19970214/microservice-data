@@ -8,7 +8,9 @@ security:
       client-id: microservices
       client_secret: 123456
     resource:
-      token-info-uri: http://localhost:8082/oauth/check_token
+#      token-info-uri: http://localhost:8082/oauth/check_token
+      user-info-uri: http://localhost:8082/auth/current
+      prefer-token-info: true
 
 #mybatis 配置
 mybatis-plus:

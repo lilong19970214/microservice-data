@@ -7,11 +7,13 @@ import com.ataraxia.microservices.entity.GenConfig;
 import com.ataraxia.microservices.util.generate.CodeGenerateUtils;
 import com.ataraxia.microservices.util.jdbc.DatabaseInfoUtils;
 import com.ataraxia.microservices.util.jdbc.DatabaseConnection;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -38,5 +40,11 @@ public class CodeGenerateController {
         List<DatabaseColumnInfo> columnInfoList = databaseInfoUtils.getColumns(genConfig);
         //生成操作 关闭链接
         codeGenerateUtils.generate(tableInfo, columnInfoList, response);
+    }
+
+
+    @GetMapping("/info")
+    public Principal info(Authentication authentication) {
+        return authentication;
     }
 }
