@@ -1,7 +1,51 @@
 server:
   port: 8083
 
-#freemarker 模板引擎
+#oauth2 权限认证配置
+security:
+  oauth2:
+    client:
+      client-id: microservices
+      client_secret: 123456
+    resource:
+#      token-info-uri: http://localhost:8082/oauth/check_token
+      user-info-uri: http://localhost:8082/auth/current
+      prefer-token-info: true
+
+#mybatis 配置
+mybatis-plus:
+  type-aliases-package: com.ataraxia.microservices.entity
+  mapper-locations: classpath:mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
+  global-config:
+    db-config:
+      #主键自增
+      id-type: auto
+
 spring:
+  #数据源配置
   datasource:
-    url:
+    url: jdbc:postgresql://127.0.0.1:5432/microservice
+    username: postgres
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+    druid:
+      max-wait: 6000
+      initial-size: 10
+      min-idle: 10
+      max-active: 200
+  #redis 配置
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    timeout: 10s
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms

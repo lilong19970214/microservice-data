@@ -6,12 +6,15 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Objects;
 
 /**
  * @author LiLong
  *
- * <p>或者指定数据库的链接时，在对应模块加入指定数据库的驱动依赖即可<p/>
+ * <p>执行sql脚本。构造时获取指定的数据库链接即可！
+ *    同理ibatis还提供了一个SqlRunner执行SQL语句的查询以及持久化操作。其构造与当前工具类也是一样的。
+ * <p/>
  */
 public final class SqlExecuteUtil {
 
@@ -86,5 +89,11 @@ public final class SqlExecuteUtil {
             Objects.requireNonNull(runner).closeConnection();
         }
         return true;
+    }
+
+
+    public static void main(String[] args) throws SQLException {
+        Connection connection = DatabaseConnection.getConnection("jdbc:postgresql://127.0.0.1:5432/microservice","postgres","123456");
+        new SqlExecuteUtil(connection).mybatisExec("select * from public.sys_user;");
     }
 }

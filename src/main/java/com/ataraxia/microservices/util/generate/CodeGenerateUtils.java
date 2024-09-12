@@ -3,33 +3,45 @@ package com.ataraxia.microservices.util.generate;
 import com.ataraxia.microservices.entity.DatabaseColumnInfo;
 import com.ataraxia.microservices.entity.DatabaseTableInfo;
 import com.ataraxia.microservices.util.MapUtils;
-import freemarker.template.Configuration;
+import com.ataraxia.microservices.util.ZipUtils;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 /**
  * <p>代码生成工具类<p/>
  *
- * @author MyPC
+ * @author lilong
  */
+@Component
 public class CodeGenerateUtils {
 
-    private static final Configuration CONFIGURATION = new Configuration(Configuration.VERSION_2_3_31);
+    @Resource
+    private FreeMarkerConfigurer configurer;
 
-    public static void generate(DatabaseTableInfo tableInfo, List<DatabaseColumnInfo> columnInfoList) {
-        CONFIGURATION.setClassForTemplateLoading(CodeGenerateUtils.class, "/templates");
+
+    public void generate(DatabaseTableInfo tableInfo, List<DatabaseColumnInfo> columnInfoList, HttpServletResponse response) {
         try {
-            Template entityTemplate = CONFIGURATION.getTemplate("entity.ftl");
+            //freemarker的默认配置就是在resources下面的templates，是可以修改的。也可以动态获取到
+            Template entityTemplate = configurer.getConfiguration().getTemplate("entity.ftl");
             Map<String, Object> data = MapUtils.of("tableInfo", tableInfo, "columnInfoList", columnInfoList);
-            entityTemplate.process(data, new FileWriter("D:/123.java"));
+            StringWriter writer = new StringWriter();
+            entityTemplate.process(data, writer);
+            ZipUtils.compressFileOutput(MapUtils.of("entity.java", writer), "生成代码.zip", response);
         } catch (IOException | TemplateException e) {
             e.printStackTrace();
         }
     }
-
 }
